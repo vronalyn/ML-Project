@@ -1,8 +1,7 @@
 # ML-Project
 Case Study #2 (Web App integrating the ML Model)
 
-1. To activate venva
-- source myVenv/Script/ctivate
+1. activate venv [source myVenv/Script/activate]
 
 2. pip install ipykernel
 
