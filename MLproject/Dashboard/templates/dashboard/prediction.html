@@ -1,16 +1,52 @@
 {% extends 'partials/base.html' %}
-{% block title %}Home{% endblock %}
+{% load static %}
+{% block title %}All Prediction{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row mt-4">
-        <div class="col-md-8 offset-md-2">
-            <div class="card shadow">
-                <div class="card-body">
-                    WATER QUALITY AND POTABILITY
-                </div>
-            </div>
+
+<div class="text">Records</div>
+    <div class="container">
+        <h1>Water Quality and Potability</h1>
+        <p>All Prediction Records</p>
+
+        <div class="container-md">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">ph</th>
+                    <th scope="col">Hardness</th>
+                    <th scope="col">Solids</th>
+                    <th scope="col">Chloramines</th>
+                    <th scope="col">Sulfate</th>
+                    <th scope="col">Conductivity</th>
+                    <th scope="col">Organic_carbon</th>
+                    <th scope="col">Trihalomethanes</th>
+                    <th scope="col">Turbidity</th>
+                    <th scope="col">Potability</th>
+                    <th scope="col">Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for data in water_quality_data %}
+                  <tr>
+                    <td>{{ data.ph }}</td>
+                    <td>{{ data.hardness }}</td>
+                    <td>{{ data.solids }}</td>
+                    <td>{{ data.chloramines }}</td>
+                    <td>{{ data.sulfate }}</td>
+                    <td>{{ data.conductivity }}</td>
+                    <td>{{ data.organic_carbon }}</td>
+                    <td>{{ data.trihalomethanes }}</td>
+                    <td>{{ data.turbidity }}</td>
+                    <td>{{ data.potability }}</td>
+                    <td>{{ data.date}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+        
         </div>
     </div>
-</div>
+
+
 {% endblock %}

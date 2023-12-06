@@ -1,0 +1,63 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+
+{% block content %}
+
+    <div class="text">Predict Water Potability</div>
+    <div class="container">
+        <h1>Water Quality Classifier</h1>
+        <p>Prediction based on the given data</p>
+
+        <div class='container-fluid'>
+            <div class="row">
+            <div class="col">
+                <h4>Provide the following info:</h4>
+            </div>
+            <div class="col align-self-center">
+                <form action='/classify' method='get'>
+                    <div class="col-md-6">
+                        <label for="ph">ph level</label><br>
+                        <input type="number" name="ph" step="any"></input><br>
+                    </div>
+                    
+                    <label for="hardness">Hardness</label><br>
+                    <input type="number" name="hardness" step="any" ></input><br>
+                    
+                    <label for="solids">Solids</label><br>
+                    <input type="number" name="solids"  step="any"></input><br>
+                    
+                    <label for="chloramines">Chloramines</label><br>
+                    <input type="number" name="chloramines" step="any" ></input><br>
+                    
+                    <label for="sulfate">Sulfate</label><br>
+                    <input type="number" name="sulfate" step="any" ></input><br>
+                    
+                    <label for="conductivity">Conductivity</label><br>
+                    <input type="number" name="conductivity" step="any" ></input><br>
+                    
+                    <label for="organic_carbon">Organic Carbon</label><br>
+                    <input type="number" name="organic_carbon"  step="any"></input><br>
+
+                    <label for="trihalomethanes">Trihalomethanes</label><br>
+                    <input type="number" name="trihalomethanes" step="any" ></input><br>
+
+                    <label for="turbidity">Turbidity</label><br>
+                    <input type="number" name="turbidity" step="any" ></input><br>
+
+                    </br>
+                
+                <div class="col align-self-center">
+                    <button type='submit' class='btn btn-primary'>Predict</button>
+                </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+{% endblock %}
