@@ -6,7 +6,84 @@
 
 {% block content %}
 
-    <div class="text">Predict Water Potability</div>
+<div class="text">Predict Water Potability</div>
+
+<div class="container">
+    <h1>Water Quality Classifier</h1>
+        <p>Prediction based on the given data</p>
+
+    <div class="card">
+        <div class="card-header">
+        Provide the Following:
+        </div>
+        <div class="card-body">
+            <div class="container">
+            <form action='/classify' method='get'>
+
+                <div class="row">
+                    <div class="col-md mb-3">
+                        <label for="ph" class="form-label">ph level</label>
+                        <input type="number" class="form-control" name="ph" 
+                            placeholder="ph level" step="any" required>
+                    </div>
+                    <div class="col-md mb-3">
+                        <label for="hardness" class="form-label">Hardness</label>
+                        <input type="number" class="form-control" name="hardness" 
+                            placeholder="Hardness" step="any" required>
+                    </div>
+                    <div class="col-md mb-3">
+                        <label for="solids" class="form-label">Solids</label>
+                        <input type="number" class="form-control" name="solids" 
+                            placeholder="Solids" step="any" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md mb-3">
+                        <label for="chloramines" class="form-label">Chloramines</label>
+                        <input type="number" class="form-control" name="chloramines" 
+                            placeholder="chloramines" step="any" required>
+                    </div>
+                    <div class="col-md mb-3">
+                        <label for="sulfate" class="form-label">Sulfate</label>
+                        <input type="number" class="form-control" name="sulfate" 
+                            placeholder="Sulfate" step="any" required>
+                    </div>
+                    <div class="col-md mb-3">
+                        <label for="conductivity" class="form-label">Conductivity</label>
+                        <input type="number" class="form-control" name="conductivity" 
+                            placeholder="Conductivity" step="any" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md mb-3">
+                        <label for="organic_carbon" class="form-label">Organic Carbon</label>
+                        <input type="number" class="form-control" name="organic_carbon" 
+                            placeholder="Organic Carbon" step="any" required>
+                    </div>
+                    <div class="col-md mb-3">
+                        <label for="trihalomethanes" class="form-label">Trihalomethanes</label>
+                        <input type="number" class="form-control" name="trihalomethanes" 
+                            placeholder="Trihalomethanes" step="any" required>
+                    </div>
+                    <div class="col-md mb-3">
+                        <label for="turbidity" class="form-label">Turbidity</label>
+                        <input type="number" class="form-control" name="turbidity" 
+                            placeholder="Turbidity" step="any" required>
+                    </div>
+                </div>
+                    <button type='submit' class='btn btn-primary'>Predict</button>
+            </form>
+        </div>
+        </div>
+        <div class="card-footer text-muted">
+        2 days ago
+        </div>
+    </div> 
+</div>
+
+    <!-- <div class="text">Predict Water Potability</div>
     <div class="container">
         <h1>Water Quality Classifier</h1>
         <p>Prediction based on the given data</p>
@@ -18,13 +95,17 @@
             </div>
             <div class="col align-self-center">
                 <form action='/classify' method='get'>
-                    <div class="col-md-6">
+                    
+                    <div class="col">
                         <label for="ph">ph level</label><br>
                         <input type="number" name="ph" step="any"></input><br>
                     </div>
                     
-                    <label for="hardness">Hardness</label><br>
-                    <input type="number" name="hardness" step="any" ></input><br>
+                    <div class="col">
+                        <label for="hardness">Hardness</label><br>
+                        <input type="number" name="hardness" step="any" ></input><br>
+                    </div>
+                    
                     
                     <label for="solids">Solids</label><br>
                     <input type="number" name="solids"  step="any"></input><br>
@@ -57,7 +138,7 @@
             </div>
         </div>
     </div>
-    </div>
+    </div> -->
 
 
 {% endblock %}
