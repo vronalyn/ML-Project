@@ -74,13 +74,22 @@ WSGI_APPLICATION = 'MLproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'predictiondb',
+#         'USER' : 'root',
+#         'PASSWORD' : '',
+#         'HOST' : 'localhost',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'predictiondb',
-        'USER' : 'root',
-        'PASSWORD' : '',
-        'HOST' : 'localhost',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'datasets',
+        'USER': 'postgres',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
     }
 }
 

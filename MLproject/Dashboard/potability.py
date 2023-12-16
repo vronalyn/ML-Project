@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import WaterQuality
+from .models import WaterPotability
 import joblib
 
 model_filename = "C:\\Users\\Ronalyn Villamor\\Documents\\VRONALYN\\ITD105\\django\\MLproject\\datasets\\models\\rfmodel.pkl"
@@ -34,12 +34,12 @@ def classifyWater(request):
     predicted = loaded_model.predict(sampletest)
     predicted = dictsqual[predicted[0]]
     
-    WaterQuality.objects.create(
+    WaterPotability.objects.create(
         ph=ph, hardness=hardness, solids=solids, chloramines=chloramines,
         sulfate=sulfate, conductivity=conductivity, organic_carbon=organic,
         trihalomethanes=trihalomethanes, turbidity=turbidity, potability=predicted
     )
 
     params = {'Category': predicted}
-    return render(request, 'Dashboard/potabilityresult.html', params)
+    return render(request, 'Dashboard/predict.html', params)
 

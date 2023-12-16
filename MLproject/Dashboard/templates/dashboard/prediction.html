@@ -19,47 +19,87 @@
 
 
         <div class="card p-4">
-        <table id="example" class="table table-striped nowrap" style="width:100%">
-          <thead>
-            <tr>
-              <th class="th-sm">ph</th>
-              <th class="th-sm">Hardness</th>
-              <th class="th-sm">Solids</th>
-              <th class="th-sm">Chloramines</th>
-              <th class="th-sm">Sulfate</th>
-              <th class="th-sm">Conductivity</th>
-              <th class="th-sm">Organic_carbon</th>
-              <th class="th-sm">Trihalomethanes</th>
-              <th class="th-sm">Turbidity</th>
-              <th class="th-sm">Potability</th>
-              <th class="th-sm">Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for data in water_quality_data %}
-            <tr>
-              <td>{{ data.ph }}</td>
-              <td>{{ data.hardness }}</td>
-              <td>{{ data.solids }}</td>
-              <td>{{ data.chloramines }}</td>
-              <td>{{ data.sulfate }}</td>
-              <td>{{ data.conductivity }}</td>
-              <td>{{ data.organic_carbon }}</td>
-              <td>{{ data.trihalomethanes }}</td>
-              <td>{{ data.turbidity }}</td>
-              <td>{{ data.potability }}</td>
-              <td>{{ data.date}}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" 
+                href="#potability" role="tab" aria-controls="nav-home" aria-selected="true">Water Potability</a>
+              <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" 
+                href="#sales" role="tab" aria-controls="nav-profile" aria-selected="false">Advertising Sales</a>
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="potability" role="tabpanel" aria-labelledby="nav-home-tab">
+              <table id="table" class="table table-striped nowrap" style="width:100%">
+                <thead>
+                  <tr>
+                    <th class="th-sm">ph</th>
+                    <th class="th-sm">Hardness</th>
+                    <th class="th-sm">Solids</th>
+                    <th class="th-sm">Chloramines</th>
+                    <th class="th-sm">Sulfate</th>
+                    <th class="th-sm">Conductivity</th>
+                    <th class="th-sm">Organic_carbon</th>
+                    <th class="th-sm">Trihalomethanes</th>
+                    <th class="th-sm">Turbidity</th>
+                    <th class="th-sm">Potability</th>
+                    <th class="th-sm">Date</th>
+                    <th class="th-sm">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for data in water_quality_data %}
+                  <tr>
+                    <td>{{ data.ph | floatformat:2}}</td>
+                    <td>{{ data.hardness | floatformat:2}}</td>
+                    <td>{{ data.solids | floatformat:2}}</td>
+                    <td>{{ data.chloramines | floatformat:2}}</td>
+                    <td>{{ data.sulfate | floatformat:2}}</td>
+                    <td>{{ data.conductivity | floatformat:2}}</td>
+                    <td>{{ data.organic_carbon | floatformat:2}}</td>
+                    <td>{{ data.trihalomethanes | floatformat:2}}</td>
+                    <td>{{ data.turbidity | floatformat:2}}</td>
+                    <td>{{ data.potability}}</td>
+                    <td>{{ data.date}}</td>
+                    <td>
+                      <a href="#" onclick="confirmDelete('{{ data.id }}')" class="btn btn-danger">Delete</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <div class="tab-pane fade" id="sales" role="tabpanel" aria-labelledby="nav-profile-tab">
+              <table id="table" class="table table-striped nowrap" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>TV</th>
+                    <th>Sales</th>
+                    <th>Action</th>
+                  </tr>
+                  <tbody>
+                    <tr>
+                      <td>32,000</td>
+                      <td>120,000</td>
+                      <td>
+                        <a href="#" class="btn btn-danger">Delete</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </thead>
+            </table>
+          </div>
+        </div>
+      
     </div>
+  </div>
 
     {% load static %}
+
     <script>
-      new DataTable('#example', {
-      responsive: true
-      });
+        new DataTable('#table', {
+            responsive: true,
+            order: [[10, 'desc']]
+        });
     </script>
+
 {% endblock %}

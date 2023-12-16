@@ -8,4 +8,5 @@ urlpatterns = [
     path('prediction/', views.predictions, name = 'prediction'),
     path('predict/', views.input, name = 'predict'),
     path('classify', potability.classifyWater, name = 'classify'),
+    path('delete/<int:id>', views.destroy, name='destroy'),
 ]

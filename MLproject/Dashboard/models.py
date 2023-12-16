@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class WaterQuality(models.Model):
+class WaterPotability(models.Model):
     ph = models.FloatField()
     hardness = models.FloatField()
     solids = models.FloatField()
