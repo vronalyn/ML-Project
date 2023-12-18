@@ -1,0 +1,62 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Sales Prediction{% endblock %}
+
+
+{% block content %}
+
+<div class="text">Create Prediction</div>
+
+<div class="container">
+    <h1>Advertising Sales</h1>
+        <p>Prediction based on the given data</p>
+
+    <div class="card">
+        <div class="card-header">
+        Provide the Following:
+        </div>
+        <div class="card-body">
+            <div class="container">
+            <form action=' ' method='get'>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="TV_Ad_Budget" class="form-label">TV Ad Budget ($)</label>
+                        <input type="number" class="form-control" name="TV_Ad_Budget" 
+                            placeholder="($)" step="any" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="Radio_Ad_Budget" class="form-label">Radio Ad Budget ($)</label>
+                        <input type="number" class="form-control" name="Radio_Ad_Budget" 
+                            placeholder="($)" step="any" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="Newspaper_Ad_Budget" class="form-label">Newspaper Ad Budget ($)</label>
+                        <input type="number" class="form-control" name="Newspaper_Ad_Budget" 
+                            placeholder="($)" step="any" required>
+                    </div>
+                </div>
+                    <button type='submit' class='btn btn-primary'>Predict</button>
+            </form>
+        </div>
+        </div>
+        <div class="card-footer text-center">
+            <div>
+                {% if predicted_sales %}
+                <h1>Result :  {{ predicted_sales | floatformat:3}}</h1>
+                {% endif %}
+            </div>
+           
+        </div>
+    </div> 
+</div>
+
+
+{% endblock %}

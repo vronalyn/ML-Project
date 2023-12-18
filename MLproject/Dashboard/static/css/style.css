@@ -20,6 +20,7 @@ body {
 }
 body.dark {
   background-color: #333;
+  
 }
 body.dark {
   --white-color: #333;
@@ -113,7 +114,7 @@ body.dark {
   content: "Dashboard";
 }
 .menu_editor::before {
-  content: "Make Prediction";
+  content: "Create Prediction";
 }
 .menu_setting::before {
   content: "Records";
@@ -280,6 +281,22 @@ body.dark {
   -webkit-backdrop-filter: blur( 7px );
   border-radius: 10px;
   border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+.card img{
+  height: 400px;
+  background-position: center ;
+  background-size: cover ;
+}
+
+.custom{
+  background: rgba( 255, 255, 255, 0.35 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 7px );
+  -webkit-backdrop-filter: blur( 7px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  height: auto;
 }
 
 @media screen and (max-width: 768px) {

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import WaterPotability
 import joblib
 
+# Start Water Quality Prediction
 model_filename = "C:\\Users\\Ronalyn Villamor\\Documents\\VRONALYN\\ITD105\\django\\MLproject\\datasets\\models\\rfmodel.pkl"
 loaded_model = joblib.load(model_filename)
 
@@ -41,5 +42,8 @@ def classifyWater(request):
     )
 
     params = {'Category': predicted}
-    return render(request, 'Dashboard/predict.html', params)
+    return render(request, 'dashboard/predict.html', params)
+
+# End Water Quality Prediction
+
 

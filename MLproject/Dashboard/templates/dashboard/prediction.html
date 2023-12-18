@@ -1,7 +1,17 @@
 {% extends 'partials/base.html' %}
-{% load static %}
+
+<!-- {% block js %}
+    <script>
+        function deleterecord(id) {
+            console.log(id);
+            // Add your delete record logic here
+        }
+    </script>
+{% endblock %} -->
+
 {% block title %}All Prediction{% endblock %}
 
+{% load static %}
 {% block content %}
 <!-- Datatable CDN -->
 <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
@@ -11,6 +21,8 @@
 <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
+<!-- Sweet Alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="text">Records</div>
     <div class="container">
@@ -20,10 +32,10 @@
 
         <div class="card p-4">
           <nav>
-            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-              <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" 
+            <div class="nav nav-tabs mb-4" id="nav-tab" role="tablist">
+              <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
                 href="#potability" role="tab" aria-controls="nav-home" aria-selected="true">Water Potability</a>
-              <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" 
+              <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
                 href="#sales" role="tab" aria-controls="nav-profile" aria-selected="false">Advertising Sales</a>
             </div>
           </nav>
@@ -48,7 +60,7 @@
                 </thead>
                 <tbody>
                   {% for data in water_quality_data %}
-                  <tr>
+                  <tr data-id="{{ data.id }}">
                     <td>{{ data.ph | floatformat:2}}</td>
                     <td>{{ data.hardness | floatformat:2}}</td>
                     <td>{{ data.solids | floatformat:2}}</td>
@@ -61,7 +73,7 @@
                     <td>{{ data.potability}}</td>
                     <td>{{ data.date}}</td>
                     <td>
-                      <a href="#" onclick="confirmDelete('{{ data.id }}')" class="btn btn-danger">Delete</a>
+                      <a href="#" onclick="deleterecord('{{ data.id }}')" class="btn btn-danger qual-delete-btn">Delete</a>
                     </td>
                   </tr>
                   {% endfor %}
@@ -69,37 +81,89 @@
               </table>
             </div>
             <div class="tab-pane fade" id="sales" role="tabpanel" aria-labelledby="nav-profile-tab">
-              <table id="table" class="table table-striped nowrap" style="width:100%">
+              <table id="table2" class="table table-striped nowrap" style="width:100%">
                 <thead>
                   <tr>
-                    <th>TV</th>
+                    <th>TV Ad Budget</th>
+                    <th>Radio Ad Budget</th>
+                    <th>Newspaper Ad Budget</th>
                     <th>Sales</th>
+                    <th>Date</th>
                     <th>Action</th>
                   </tr>
-                  <tbody>
-                    <tr>
-                      <td>32,000</td>
-                      <td>120,000</td>
+                </thead>
+                <tbody>
+                    {% for data in ad_sales_data %}
+                    <tr data-id="{{ data.id }}">
+                      <td>{{ data.TV_Ad_Budget | floatformat:3}}</td>
+                      <td>{{ data.Radio_Ad_Budget | floatformat:3}}</td>
+                      <td>{{ data.Newspaper_Ad_Budget | floatformat:3}}</td>
+                      <td>{{ data.Sales | floatformat:3}}</td>
+                      <td>{{ data.date}}</td>
                       <td>
-                        <a href="#" class="btn btn-danger">Delete</a>
+                        <a href="#" onclick="deleterecord('{{ data.id }}')" class="btn btn-danger sales-delete-btn">Delete</a>
                       </td>
                     </tr>
-                  </tbody>
-                </thead>
+                    {% endfor %}
+                </tbody>
             </table>
           </div>
         </div>
-      
+
     </div>
   </div>
 
     {% load static %}
-
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script>
+        function deleterecord(id) {
+            console.log(id);
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                confirmButtonText: "Delete",
+                reverseButtons: true
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'DELETE',
+                        url: '/prediction/delete/' + id + '/',
+                        success: function (data) {
+                            // Update the table here
+                            // For example, remove the deleted row
+                            $('tr[data-id="' + id + '"]').remove();
+                            Swal.fire("Deleted!", "Your record has been deleted.", "success");
+                        },
+                        error: function (xhr, status, error) {
+                            Swal.fire("Error!", "Failed to delete record.", "error");
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+    <script>
+
         new DataTable('#table', {
             responsive: true,
             order: [[10, 'desc']]
         });
+        new DataTable('#table2', {
+            responsive: true,
+            order: [[4, 'desc']]
+        });
+
+        $('#nav-tab a').on('click', function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+      })
     </script>
+
+
 
 {% endblock %}

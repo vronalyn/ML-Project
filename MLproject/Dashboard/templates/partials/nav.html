@@ -11,7 +11,7 @@
         <i class="bi bi-grid"></i>
         <i class='bx bx-sun' id="darkLight"></i>
         <i class='bx bx-bell' ></i>
-        <img src="{% static 'img/bg.jpg' %}" alt="" class="profile" />
+        <img src="{% static 'img/person.jpg' %}" alt="" class="profile" />
       </div>
     </nav>
 
@@ -22,7 +22,7 @@
           <div class="menu_title menu_dahsboard"></div>
           <!-- start -->
           <li class="item">
-            <a href="{% url 'dashboard' %}" class="nav_link">
+            <a href="{% url 'chart' %}" class="nav_link">
               <span class="navlink_icon">
                 <i class='bx bx-home' ></i>
               </span>
@@ -33,7 +33,7 @@
 
           <!-- start -->
           <li class="item">
-            <a href="#" class="nav_link">
+            <a href="{% url 'overview' %}" class="nav_link">
               <span class="navlink_icon">
                 <i class='bx bxs-grid-alt' ></i>
               </span>
@@ -56,7 +56,7 @@
           </li>
 
           <li class="item">
-            <a href="#" class="nav_link">
+            <a href="{% url 'predictsales' %}" class="nav_link">
               <span class="navlink_icon">
                 <i class='bx bx-line-chart' ></i>
               </span>
@@ -70,17 +70,9 @@
           <li class="item">
             <a href="{% url 'prediction' %}" class="nav_link">
               <span class="navlink_icon">
-                <i class="bx bx-flag"></i>
+                <i class='bx bxs-data'></i>
               </span>
-              <span class="navlink">Water Potability</span>
-            </a>
-          </li>
-          <li class="item">
-            <a href="#" class="nav_link">
-              <span class="navlink_icon">
-                <i class="bx bx-medal"></i>
-              </span>
-              <span class="navlink">Advertising Sales</span>
+              <span class="navlink">All Predictions</span>
             </a>
           </li>
         </ul>

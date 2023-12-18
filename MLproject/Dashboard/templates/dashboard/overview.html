@@ -1,0 +1,53 @@
+{% extends 'partials/base.html' %}
+
+{% load static %}
+
+{% block title %}Overview{% endblock %}
+
+{% block content %}
+
+    <div class="text">Overview</div>
+    <div class="container">
+        <h1>About the Datasets</h1>
+        <!-- start content -->
+        
+            <div class="row">
+                <div class="col-md mt-4">
+                    <div class="card" style="width: 100%;">
+                        <img src="{% static 'img/qual.jpg' %}" class="card-img-top" alt="water quality card">
+                        <div class="card-body">
+                          <h5 class="card-title">Water Quality and Potability</h5>
+                          <p class="card-text">Access to safe drinking-water is essential to health, 
+                            a basic human right and a component of effective policy for health protection. 
+                            This is important as a health and development issue at a national, regional and local level. 
+                            In some regions, it has been shown that investments in water supply and sanitation can yield a net economic benefit, 
+                            since the reductions in adverse health effects and health care costs outweigh the costs of undertaking the interventions.</p>
+                          <a href="https://www.kaggle.com/datasets/adityakadiwal/water-potability" class="btn btn-primary">Go to Dataset</a>
+                        </div>
+                      </div>
+                </div>
+                <div class="col-md mt-4">
+                    <div class="card" style="width: 100%;">
+                        <img src="{% static 'img/ads.jpg' %}" class="card-img-top" alt="advertising card">
+                        <div class="card-body">
+                          <h5 class="card-title">Advertising Budget and Sales</h5>
+                          <p class="card-text">The advertising dataset captures the sales revenue generated with 
+                            respect to advertisement costs across multiple channels like radio, tv, and newspapers. <br>
+
+                            It is required to understand the impact of ad budgets on the overall sales. 
+                        </p>
+                        <p>
+                            The dataset contains 200 data samples of 3 features & a target variable.
+                        </p>
+                          <a href="https://www.kaggle.com/datasets/yasserh/advertising-sales-dataset/data" class="btn btn-primary">Go to Dataset</a>
+                        </div>
+                      </div>
+                </div>
+            
+        </div>
+        
+        <!-- end content -->
+    </div>
+{% endblock %}
+
+

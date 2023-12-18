@@ -1,0 +1,210 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+    <div class="text">Dashboard</div>
+    <div class="container">
+        <h3>Water Quality and Potability</h3>
+        <div class="row">
+            <div class="col-md mt-4">
+                <div class="card">
+                    <div class="card-header">
+                        Total Records
+                    </div>
+                    <div class="card-body">
+                        <h1 class="text-center">{{ total_records }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md mt-4">
+                <div class="card">
+                    <div class="card-header">
+                        Potable Count
+                    </div>
+                    <div class="card-body">
+                        <h1 class="text-center">{{ potable_count }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md mt-4">
+                <div class="card">
+                    <div class="card-header">
+                        Not Potable Count
+                    </div>
+                    <div class="card-body">
+                        <h1 class="text-center">{{ not_potable_count }}</h1>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="custom mt-4 p-4">
+            <div class="row">
+                <div class="col-md">
+                    <canvas id="potabilityChart" width="400" height="400"></canvas>
+                </div>
+                <div class="col-md">
+                    <canvas id="maxBarChart" width="400" height="400"></canvas>       
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <br>
+        </div>
+        <h3>Advertising Budget and Sales</h3>
+        <div class="row">
+            <div class="col-md mt-4">
+                <div class="card">
+                    <div class="card-header">
+                        Average TV Ad Budget
+                    </div>
+                    <div class="card-body">
+                        <h1 class="text-center">
+                            <i class='bx bx-dollar'></i>
+                            {{ average_tv_budget | floatformat:2 }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md mt-4">
+                <div class="card">
+                    <div class="card-header">
+                        Average Radio Ad Budget
+                    </div>
+                    <div class="card-body">
+                        <h1 class="text-center">
+                            <i class='bx bx-dollar'></i>
+                            {{ average_radio_budget | floatformat:2 }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md mt-4">
+                <div class="card">
+                    <div class="card-header">
+                        Average Newspaper Ad Budget
+                    </div>
+                    <div class="card-body">
+                        <h1 class="text-center">
+                            <i class='bx bx-dollar'></i>
+                            {{ average_newspaper_budget | floatformat:2 }}</h1>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="custom mt-4 p-4">
+            <div class="row">
+                <div class="col-md">
+                    <canvas id="averageBudgetChart" width="400" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var ctx = document.getElementById('potabilityChart').getContext('2d');
+            var potableCount = '{{ potable_count }}';
+            var notPotableCount = '{{ not_potable_count }}';
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Potable', 'Not Potable'],
+                    datasets: [{
+                        label: 'Potable Water',
+                        data: [potableCount, notPotableCount],
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 99, 132, 0.5)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    // Other Chart.js options can be added here
+                }
+            });
+
+            // Bar Chart
+            var ctxBar = document.getElementById('maxBarChart').getContext('2d');
+            var maxData = '{{ max_values_list|safe }}';
+            var maxChart = new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: ['ph', 'Hardness', 'Solids', 'Chloramines', 'Sulfate', 'Conductivity', 'Organic Carbon', 'Trihalomethanes', 'Turbidity'],
+                    datasets: [{
+                        label: 'Highest Value Recorded',
+                        data: maxData, // Use the array directly
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                        borderColor: 'rgba(255, 255, 255, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                        }
+                    }
+                }
+            });
+        });       
+    </script>
+<script>
+       // Retrieve average budget values from the Django view
+       var averageTV = '{{ average_tv_budget }}';
+        var averageRadio = '{{ average_radio_budget }}';
+        var averageNewspaper = '{{ average_newspaper_budget }}';
+
+        // Create a bar chart
+        var ctx = document.getElementById('averageBudgetChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['TV', 'Radio', 'Newspaper'],
+                datasets: [{
+                    label: 'Average Budget',
+                    data: [averageTV, averageRadio, averageNewspaper],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)', // TV
+                        'rgba(54, 162, 235, 0.5)', // Radio
+                        'rgba(75, 192, 192, 0.5)' // Newspaper
+                    ],
+                    borderColor: [
+                        'rgba(255, 255, 255, 1)',
+                        'rgba(255, 255, 255, 1)',
+                        'rgba(255, 255, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Average Budget'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Advertising Medium'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+{% endblock %}
+

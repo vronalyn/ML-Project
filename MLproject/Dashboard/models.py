@@ -19,4 +19,24 @@ class WaterPotability(models.Model):
         ordering = ['-date']
 
     def __str__(self):
-        return self.name
+        return self.potability
+    
+
+class AdSales(models.Model):
+    TV_Ad_Budget = models.FloatField()
+    Radio_Ad_Budget = models.FloatField()
+    Newspaper_Ad_Budget = models.FloatField()
+    Sales = models.FloatField()
+    date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-date']
+
+    def __str__(self):
+        return (
+            f"{self.TV_Ad_Budget} - "
+            f"{self.Radio_Ad_Budget} - "
+            f"{self.Newspaper_Ad_Budget} - "
+            f"{self.Sales} - "
+            f"{self.date}"
+        )
