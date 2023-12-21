@@ -15,13 +15,12 @@ def predict_sales(request):
             Radio_Ad = float(request.GET['Radio_Ad_Budget'])
             Newspaper_Ad = float(request.GET['Newspaper_Ad_Budget'])
 
-            # Create a DataFrame with user input
+            # Dataframe
             new_data = pd.DataFrame([[TV_Ad, Radio_Ad, Newspaper_Ad]], columns=['TV_Ad_Budget', 'Radio_Ad_Budget', 'Newspaper_Ad_Budget'])
 
-            # Make predictions using the loaded model on the user input
             predicted_sales = loaded_model.predict(new_data)
 
-            # Save input data and predicted sales to the database
+            # Save data
             AdSales.objects.create(
                 TV_Ad_Budget=TV_Ad,
                 Radio_Ad_Budget=Radio_Ad,
@@ -29,11 +28,10 @@ def predict_sales(request):
                 Sales=predicted_sales[0]
             )
 
-            # Render a template with predicted sales
-            context = {'predicted_sales': predicted_sales[0]}  # Sending the predicted sales to the template
+            # Render a template 
+            context = {'predicted_sales': predicted_sales[0]} 
             return render(request, 'Dashboard/predictsales.html', context)
         else:
-            # Render the initial form if data is not complete
             return render(request, 'Dashboard/predictsales.html', {})
     else:
         return render(request, 'Dashboard/predictsales.html', {})
